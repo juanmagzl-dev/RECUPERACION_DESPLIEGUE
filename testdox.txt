@@ -1,0 +1,43 @@
+Example
+ [x] Basic example
+ [x] Initial setup
+ [x] Project structure
+
+Minesweeper Map
+ [x] Basic map creation
+ [x] Invalid rows parameter
+ [x] Invalid cols parameter
+ [x] Too many mines
+ [x] Negative mines
+ [x] Map generation
+ [x] Mine count after generation
+ [x] Adjacent numbers
+ [x] Easy difficulty
+ [x] Medium difficulty
+ [x] Expert difficulty
+ [x] Invalid difficulty
+ [x] Json export
+ [x] Json import
+ [ ] Xml export
+ [x] Xml import
+ [x] Invalid json import
+ [x] Invalid json format
+ [ ] Invalid xml import
+ [x] Invalid xml format
+ [x] Save to file json
+ [ ] Save to file xml
+ [x] Load from file json
+ [x] Load from file xml
+ [x] Load non existent file
+ [x] Unsupported save format
+ [x] Unsupported load format
+ [x] Access ungenerated map
+ [x] Json export ungenerated map
+ [x] Xml export ungenerated map
+ [x] Save ungenerated map
+ [x] Minimum map
+ [x] Large map
+ [x] Multiple generations
+ [x] Json data integrity
+ [x] Xml data integrity
+

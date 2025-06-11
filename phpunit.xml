@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         cacheResultFile=".phpunit.result.cache"
+         executionOrder="depends,defects"
+         failOnRisky="true"
+         failOnWarning="true"
+         verbose="true">
+    
+    <testsuites>
+        <testsuite name="Unit Tests">
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <coverage cacheDirectory=".phpunit.cache/code-coverage"
+              processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+        <exclude>
+            <directory suffix=".php">./src/frontend</directory>
+        </exclude>
+        <report>
+            <html outputDirectory="coverage/html"/>
+            <text outputFile="php://stdout"/>
+            <clover outputFile="coverage.xml"/>
+        </report>
+    </coverage>
+
+    <php>
+        <ini name="error_reporting" value="-1" />
+        <ini name="memory_limit" value="512M" />
+    </php>
+</phpunit>
