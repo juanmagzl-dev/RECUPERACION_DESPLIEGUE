@@ -38,6 +38,37 @@ docker-compose logs -f
 docker-compose down
 ```
 
+### Despliegue Manual sin Docker Compose
+
+Si no tienes docker-compose instalado, puedes usar los scripts alternativos:
+
+**En Windows:**
+```bash
+# Ejecutar script batch
+docker/deploy-manual.bat
+```
+
+**En Linux/Mac:**
+```bash
+# Hacer ejecutable y ejecutar
+chmod +x docker/deploy-manual.sh
+./docker/deploy-manual.sh
+```
+
+**Comandos manuales:**
+```bash
+# Construir imagen
+docker build -t minesweeper-map-generator:latest .
+
+# Ejecutar contenedor
+docker run -d \
+  -p 8080:443 \
+  -p 8000:80 \
+  --name minesweeper-map-generator \
+  --restart unless-stopped \
+  minesweeper-map-generator:latest
+```
+
 ### Comandos Docker Individuales
 
 ```bash
