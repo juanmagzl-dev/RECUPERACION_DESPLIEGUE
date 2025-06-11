@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  minesweeper-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: minesweeper-map-generator
+    ports:
+      - "8080:443"  # Map container HTTPS port to host port 8080
+      - "8000:80"   # Map container HTTP port to host port 8000 (for redirects)
+    volumes:
+      - ./logs:/var/log/apache2  # Mount logs directory for easy access
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/https
+      - PHP_DISPLAY_ERRORS=Off
+      - PHP_LOG_ERRORS=On
+    healthcheck:
+      test: ["CMD", "curl", "-f", "https://localhost/", "-k"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    networks:
+      - minesweeper-network
+
+networks:
+  minesweeper-network:
+    driver: bridge
+
+volumes:
+  logs:
+    driver: local 

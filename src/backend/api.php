@@ -43,6 +43,40 @@ function sendError($message, $status = 400) {
     ], $status);
 }
 
+/**
+ * Verifica si el usuario está autenticado para operaciones de mapas
+ */
+function checkMapAuthentication() {
+    // Si estamos en un contenedor Docker o detrás de Apache con autenticación,
+    // Apache ya habrá verificado las credenciales
+    if (isset($_SERVER['REMOTE_USER'])) {
+        return true;
+    }
+    
+    // Verificación adicional para desarrollo local
+    if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
+        $user = $_SERVER['PHP_AUTH_USER'];
+        $pass = $_SERVER['PHP_AUTH_PW'];
+        
+        // Usuario de ejemplo (en producción se verificaría contra una base de datos)
+        if ($user === 'mapmanager' && $pass === 'mapmanager123') {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+/**
+ * Requiere autenticación para operaciones de mapas
+ */
+function requireMapAuthentication() {
+    if (!checkMapAuthentication()) {
+        header('WWW-Authenticate: Basic realm="Map Management Access"');
+        sendError("Se requiere autenticación para acceder a esta funcionalidad", 401);
+    }
+}
+
 try {
     $method = $_SERVER['REQUEST_METHOD'];
     $action = $_GET['action'] ?? '';
@@ -179,6 +213,9 @@ function generateMapFromDifficulty($input) {
  * Guarda un mapa (devuelve el contenido para descarga)
  */
 function saveMap($input) {
+    // Verificar autenticación
+    requireMapAuthentication();
+    
     $mapData = $input['mapData'] ?? null;
     $format = $input['format'] ?? 'json';
     
@@ -232,6 +269,9 @@ function saveMap($input) {
  * Carga un mapa desde contenido JSON/XML
  */
 function loadMap($input) {
+    // Verificar autenticación
+    requireMapAuthentication();
+    
     $content = $input['content'] ?? '';
     $format = $input['format'] ?? 'json';
     

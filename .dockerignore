@@ -1,0 +1,46 @@
+# Git
+.git
+.gitignore
+.github
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Development files
+.phpunit.result.cache
+testdox.txt
+testdox.html
+tests/
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+nul
+
+# Scripts de desarrollo
+run_server.bat
+run_server.sh
+router.php
+
+# Documentation
+README.md
+
+# Node modules si existieran
+node_modules/
+npm-debug.log
+yarn-error.log 
