@@ -26,8 +26,56 @@
 
         <section id="map" style="display: none;">
             <h2>Generador de Mapas</h2>
+            
+            <!-- Formulario de dificultad -->
+            <div class="difficulty-selector">
+                <h3>Seleccionar Dificultad</h3>
+                <div class="difficulty-buttons">
+                    <button class="difficulty-btn" data-difficulty="easy">Fácil (9x9, 10 minas)</button>
+                    <button class="difficulty-btn" data-difficulty="medium">Medio (16x16, 40 minas)</button>
+                    <button class="difficulty-btn" data-difficulty="expert">Experto (30x16, 99 minas)</button>
+                    <button class="difficulty-btn" data-difficulty="custom">Personalizado</button>
+                </div>
+                
+                <!-- Configuración personalizada -->
+                <div id="custom-config" class="custom-config" style="display: none;">
+                    <h4>Configuración Personalizada</h4>
+                    <div class="input-group">
+                        <label for="custom-rows">Filas:</label>
+                        <input type="number" id="custom-rows" min="5" max="50" value="9">
+                    </div>
+                    <div class="input-group">
+                        <label for="custom-cols">Columnas:</label>
+                        <input type="number" id="custom-cols" min="5" max="50" value="9">
+                    </div>
+                    <div class="input-group">
+                        <label for="custom-mines">Minas:</label>
+                        <input type="number" id="custom-mines" min="1" max="100" value="10">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="action-buttons">
+                <button id="generate-btn" class="action-btn primary">Generar Mapa</button>
+                <button id="save-btn" class="action-btn secondary" disabled>Guardar Mapa</button>
+                <div class="file-input-container">
+                    <label for="load-file" class="action-btn secondary">Cargar Mapa</label>
+                    <input type="file" id="load-file" accept=".json,.xml" style="display: none;">
+                </div>
+            </div>
+
+            <!-- Información del mapa -->
+            <div id="map-info" class="map-info" style="display: none;">
+                <h4>Información del Mapa</h4>
+                <p><strong>Dimensiones:</strong> <span id="info-dimensions"></span></p>
+                <p><strong>Minas:</strong> <span id="info-mines"></span></p>
+                <p><strong>Dificultad:</strong> <span id="info-difficulty"></span></p>
+            </div>
+
+            <!-- Contenedor del mapa visual -->
             <div id="map-container">
-                <!-- Aquí irá el generador de mapas -->
+                <div id="map-grid" class="map-grid"></div>
             </div>
         </section>
 
