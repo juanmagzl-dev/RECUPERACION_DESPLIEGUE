@@ -65,32 +65,118 @@ cd recuperacion_Despliegue
 - **Documentación completa**: README actualizado con todas las fases
 - **Configuración git**: .gitignore optimizado para PHP y testing
 
-## Cómo usar el proyecto
+## 🚀 Cómo usar el proyecto
 
 ### Requisitos
-- Servidor web con PHP 7.4+
+- PHP 7.4+ 
 - Extensiones PHP: SimpleXML, JSON
+- Navegador web moderno
 
-### Instalación
-1. Clona el repositorio
-2. Configura un servidor web (Apache/Nginx) o usa el servidor integrado de PHP
-3. Navega a `src/frontend/index.html` para la interfaz de usuario
+### 🎯 Instalación y Ejecución
 
-### Uso del servidor integrado de PHP
+1. **Clonar el repositorio**:
 ```bash
-cd src/backend
-php -S localhost:8000
+git clone https://github.com/juanmagzl-dev/RECUPERACION_DESPLIEGUE.git
+cd RECUPERACION_DESPLIEGUE
 ```
 
-Luego abre `src/frontend/index.html` en tu navegador.
+2. **Instalar dependencias**:
+```bash
+composer install
+```
 
-### Estructura de la API
-- `GET /api.php?action=info` - Información de la API
-- `GET /api.php?action=difficulties` - Niveles de dificultad disponibles
-- `POST /api.php?action=generate` - Generar mapa personalizado
-- `POST /api.php?action=generate_difficulty` - Generar por dificultad
-- `POST /api.php?action=save` - Preparar mapa para descarga
-- `POST /api.php?action=load` - Cargar mapa desde contenido
+3. **Iniciar el servidor** (método recomendado):
+```bash
+php -S localhost:8000 router.php
+```
+
+4. **Scripts automatizados**:
+```bash
+# Windows
+run_server.bat
+
+# Linux/Mac  
+chmod +x run_server.sh
+./run_server.sh
+```
+
+5. **Acceder a la aplicación**:
+   - 🏠 **Página principal**: `http://localhost:8000`
+   - 🎮 **Juego**: `http://localhost:8000/src/frontend/`
+   - 🔧 **API**: `http://localhost:8000/src/backend/api.php?action=info`
+
+### 🔧 Router personalizado (`router.php`)
+
+El proyecto incluye un router personalizado que soluciona los problemas de routing entre frontend y backend:
+
+**✅ Características:**
+- Manejo inteligente de rutas frontend y backend
+- Página de bienvenida elegante sin redirecciones infinitas
+- Servicio correcto de archivos estáticos (CSS, JS, HTML)
+- Eliminación de errores 404 y bucles de redirección
+
+**🛠️ Funcionamiento:**
+- Detecta rutas de la API (`/src/backend/api.php`) y las procesa
+- Sirve archivos estáticos del frontend con tipos MIME correctos
+- Proporciona página de bienvenida en la ruta raíz
+- Maneja errores 404 con página informativa
+
+**🎯 Ventajas:**
+- Un solo comando para ejecutar toda la aplicación
+- Sin configuración adicional de servidor web
+- Desarrollo y testing simplificados
+
+### 🎮 Funcionalidades del Juego
+
+**Niveles de dificultad:**
+- 🟢 **Fácil**: 9x9 con 10 minas
+- 🟡 **Medio**: 16x16 con 40 minas  
+- 🔴 **Experto**: 30x16 con 99 minas
+- ⚙️ **Personalizado**: Define tu propio tamaño y número de minas
+
+**Características:**
+- 💣 Visualización de minas con símbolos
+- 🔢 Números indicando minas cercanas
+- 💾 Guardado/carga de mapas en formato JSON
+- 📱 Diseño responsivo para dispositivos móviles
+- ⚡ Generación instantánea de mapas
+
+### 🔧 Estructura de la API
+- `GET /src/backend/api.php?action=info` - Información de la API
+- `GET /src/backend/api.php?action=difficulties` - Niveles de dificultad disponibles
+- `POST /src/backend/api.php?action=generate` - Generar mapa personalizado
+- `POST /src/backend/api.php?action=generate_difficulty` - Generar por dificultad
+- `POST /src/backend/api.php?action=save` - Preparar mapa para descarga
+- `POST /src/backend/api.php?action=load` - Cargar mapa desde contenido
+
+### 🚨 Solución de problemas
+
+**❌ Error "PHP no encontrado"**
+```bash
+# Instalar PHP o agregar al PATH del sistema
+# Windows: Descargar de https://www.php.net/downloads
+# O instalar XAMPP: https://www.apachefriends.org/
+```
+
+**❌ Error "404 Not Found" o "ERR_TOO_MANY_REDIRECTS"**
+```bash
+# Usar el router personalizado:
+php -S localhost:8000 router.php
+
+# NO usar:
+php -S localhost:8000 -t src/frontend
+```
+
+**❌ Error "API no conecta"**
+- Verificar que el servidor esté corriendo con `router.php`
+- Probar API directamente: `http://localhost:8000/src/backend/api.php?action=info`
+
+**❌ Puerto ocupado**
+```bash
+# Usar otro puerto:
+php -S localhost:3000 router.php
+# Luego ir a: http://localhost:3000
+```
 
 ## Desarrollo
 

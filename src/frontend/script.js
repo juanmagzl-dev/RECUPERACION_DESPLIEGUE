@@ -129,7 +129,7 @@ async function generateMap() {
             const cols = parseInt(document.getElementById('custom-cols').value);
             const mines = parseInt(document.getElementById('custom-mines').value);
 
-            response = await fetch('../backend/api.php?action=generate', {
+            response = await fetch('src/backend/api.php?action=generate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -138,7 +138,7 @@ async function generateMap() {
             });
         } else if (selectedDifficulty) {
             // Generar mapa por dificultad
-            response = await fetch('../backend/api.php?action=generate_difficulty', {
+            response = await fetch('src/backend/api.php?action=generate_difficulty', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -236,7 +236,7 @@ async function saveMap() {
     try {
         showLoading(true);
 
-        const response = await fetch('../backend/api.php?action=save', {
+        const response = await fetch('src/backend/api.php?action=save', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -278,7 +278,7 @@ async function loadMap(event) {
         const content = await readFileContent(file);
         const format = file.name.endsWith('.xml') ? 'xml' : 'json';
 
-        const response = await fetch('../backend/api.php?action=load', {
+        const response = await fetch('src/backend/api.php?action=load', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -393,7 +393,7 @@ function showLoading(show) {
  */
 async function testBackendConnection() {
     try {
-        const response = await fetch('../backend/api.php?action=info');
+        const response = await fetch('src/backend/api.php?action=info');
         const data = await response.json();
         
         console.log('Conexión con API exitosa:', data);
