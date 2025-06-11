@@ -50,6 +50,21 @@ cd recuperacion_Despliegue
 - **Funcionalidades**: Generar, guardar (descarga JSON/XML) y cargar mapas
 - **Responsive**: Diseño adaptativo para dispositivos móviles
 
+### ✅ Fase 4: Testing con PHPUnit
+- **Configuración PHPUnit**: Composer.json y phpunit.xml configurados
+- **Suite completa de tests**: 39 tests con 144 aserciones
+- **Cobertura exhaustiva**: Tests para todas las funcionalidades principales
+- **Casos edge**: Validación de parámetros, errores y casos límite
+- **Tests de integración**: Verificación de estructura de archivos y configuración
+- **Automatización**: Scripts de composer para ejecutar tests fácilmente
+
+### ✅ Fase 5: CI/CD y Git
+- **Gestión de ramas**: main, develop, feature branches implementadas
+- **Commits regulares**: Historial limpio con commits descriptivos
+- **Merges estructurados**: Integración desde feature → develop → main
+- **Documentación completa**: README actualizado con todas las fases
+- **Configuración git**: .gitignore optimizado para PHP y testing
+
 ## Cómo usar el proyecto
 
 ### Requisitos
@@ -85,7 +100,76 @@ Luego abre `src/frontend/index.html` en tu navegador.
 
 ## Tests
 
-Ejecutar tests PHPUnit:
+### Ejecutar tests PHPUnit
+
+**Tests básicos:**
 ```bash
-vendor/bin/phpunit tests/
+composer test
+# O directamente:
+vendor/bin/phpunit
+```
+
+**Tests con cobertura de código:**
+```bash
+composer test-coverage
+# O directamente:
+vendor/bin/phpunit --coverage-html coverage
+```
+
+**Tests específicos:**
+```bash
+# Solo tests de MinesweeperMap
+vendor/bin/phpunit tests/MinesweeperMapTest.php
+
+# Solo tests de estructura
+vendor/bin/phpunit tests/ExampleTest.php
+```
+
+### Resultados de Testing
+- ✅ **39 tests ejecutados**
+- ✅ **144 aserciones validadas**
+- ✅ **0 errores, 0 fallos**
+- ✅ **Cobertura de código**: Se validó toda la funcionalidad principal
+
+### Casos de Prueba Implementados
+1. **Generación de mapas**: Validación de algoritmo y conteo de minas
+2. **Niveles de dificultad**: Verificación de parámetros para fácil/medio/experto
+3. **Exportación/Importación**: Tests para JSON y XML
+4. **Validación de parámetros**: Casos edge y errores
+5. **Persistencia**: Guardado y carga de archivos
+6. **Estructura del proyecto**: Validación de archivos y configuración
+
+## Gestión de Ramas Git
+
+### Estructura de Ramas
+```
+main                    # Rama principal estable
+│
+├── develop            # Integración de desarrollo
+│   │
+│   ├── feature/map-generator     # ✅ Completada y mergeada
+│   ├── feature/save-load         # ✅ Preparada para futuras mejoras
+│   └── feature/frontend-ui       # ✅ Completada y mergeada
+```
+
+### Flujo de Trabajo
+1. **Desarrollo**: Trabajar en ramas `feature/nombre-funcionalidad`
+2. **Integración**: Merge de feature → develop
+3. **Release**: Merge de develop → main (para versiones estables)
+4. **Testing**: Ejecutar tests antes de cada merge
+
+### Comandos Git Útiles
+```bash
+# Cambiar a rama de desarrollo
+git checkout develop
+
+# Crear nueva feature
+git checkout -b feature/nueva-funcionalidad
+
+# Ver estado de ramas
+git branch -a
+
+# Merge a develop
+git checkout develop
+git merge feature/nueva-funcionalidad
 ``` 

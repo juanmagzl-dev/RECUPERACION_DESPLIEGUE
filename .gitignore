@@ -35,4 +35,15 @@ cache/
 
 # Archivos de compilación
 dist/
-build/ 
+build/
+
+# PHPUnit y testing
+coverage/
+.phpunit.result.cache
+.phpunit.cache/
+testdox.html
+testdox.txt
+
+# Composer
+vendor/
+composer.phar 
